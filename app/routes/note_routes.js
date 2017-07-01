@@ -8,8 +8,11 @@ module.exports = function(app, db)
 	{
 		const id = req.params.id;
 		const details = { '_id' : new ObjectID(id) };
-		var updateedBody = req.body.body;
+		var updatedBody = req.body.body;
 		var updatedTitle = req.body.title;
+		console.log('Got PUT request for id : ' + id);
+		console.log('Got PUT request body: ' + JSON.stringify(req.body));
+		/*
 		var note;
 		if ( updatedBody != null && updateTitle != null)
 		{
@@ -28,8 +31,9 @@ module.exports = function(app, db)
 		{
 			return res.send('Nothing to update');
 		}
+		*/
 
-//		const note = { text : req.body.body, title : req.body.title };
+		const note = { text: req.body.body, title: req.body.title };
 
 		db.collection('notes').update(details, note, (err, item) =>
 		{
@@ -39,6 +43,7 @@ module.exports = function(app, db)
 			}
 			else
 			{
+				console.log("Got text: " + note.text + ", title: " + note.title);
 				console.log("Updated item: " + item);
 				res.send(note);
 			}
@@ -91,6 +96,7 @@ module.exports = function(app, db)
 	{
 		console.log(req.body);
 		const note = { text: req.body.body, title: req.body.title};
+		console.log('Got POST request for body : ' + req.body);
 		db.collection('notes').insert(note, (err, result) => 
 		{
 			if (err)

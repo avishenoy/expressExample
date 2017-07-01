@@ -11,4 +11,4 @@ RUN npm install
 COPY . /usr/src/app
 EXPOSE 5000
 
-CMD ["nodemon", "server.js"]
+CMD ["node", "server.js"]
