@@ -4,6 +4,14 @@ var ObjectID = require('mongodb').ObjectID;
 
 module.exports = function(app, db)
 {
+	app.get('/echo', (req, res) => {
+		res.send("Echo test server");
+	});
+
+	app.trace('/notes', (req, res) => {
+		res.send("Request trace result");
+	})
+
 	app.put('/notes/:id', (req, res) => 
 	{
 		const id = req.params.id;
